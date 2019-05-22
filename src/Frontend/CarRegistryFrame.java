@@ -42,6 +42,8 @@ public class CarRegistryFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tblData.setAutoCreateRowSorter(true);
+
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, carsList, tblData);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
         columnBinding.setColumnName("Id");
@@ -116,6 +118,11 @@ public class CarRegistryFrame extends javax.swing.JFrame {
         });
 
         BTNDelete.setText("DELETE");
+        BTNDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNDeleteActionPerformed(evt);
+            }
+        });
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblData, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.available}"), CBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
@@ -182,12 +189,13 @@ public class CarRegistryFrame extends javax.swing.JFrame {
                     .addComponent(TFPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTNAdd))
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(TFMODELL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTNRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel5)
+                        .addComponent(TFMODELL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTNRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -243,6 +251,20 @@ public class CarRegistryFrame extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_BTNRecordActionPerformed
+
+    private void BTNDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNDeleteActionPerformed
+        try {
+            // TODO : athelyezni backendbe nem a gombok on fjetjuk ki mukodesuket..
+                int selectedRow = tblData.getSelectedRow();
+                selectedRow = tblData.convertRowIndexToModel(selectedRow);
+                entityManager.remove(carsList.get(selectedRow));
+                entityManager.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                SyncData();
+                
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_BTNDeleteActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

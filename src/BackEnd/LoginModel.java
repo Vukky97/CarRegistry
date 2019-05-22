@@ -8,8 +8,10 @@ public class LoginModel {
     
     private LoginView lview;
     
-    private String name = "user";
-    private String password = "pass";
+    private String AdminName = "admin";
+    private String AdminPassword = "pass";
+    private String UserName = "user";
+    private String UserPassword = "1234";
     private int numberOfTry = 0;
     private int maxNumberOfTry = 5;
     
@@ -18,10 +20,11 @@ public class LoginModel {
         this.lview = view;
     }
     
+    //TODO: switch es meghivni megfelelo viselkeest v staregia
     public void CheckUserAcces(){
         LoginAttempt();
-        if(lview.GetName().equals(this.name)&& numberOfTry <= maxNumberOfTry){
-            if(lview.GetPass().equals(this.password)){
+        if(lview.GetName().equals(this.AdminName)&& numberOfTry <= maxNumberOfTry){
+            if(lview.GetPass().equals(this.AdminPassword)){
                 LoadRegistryForm();
             }
             else{

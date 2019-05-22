@@ -127,12 +127,14 @@
                   <Component id="BTNAdd" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="TFMODELL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BTNRecord" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="CBox" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="TFMODELL" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BTNRecord" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -158,6 +160,9 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JTable" name="tblData">
+          <Properties>
+            <Property name="autoCreateRowSorter" type="boolean" value="true"/>
+          </Properties>
           <BindingProperties>
             <BindingProperty name="elements" source="carsList" target="tblData" targetPath="elements" updateStrategy="0" immediately="false">
               <Subbinding sourcePath="${id}">
@@ -274,6 +279,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="DELETE"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTNDeleteActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="CBox">
       <BindingProperties>
