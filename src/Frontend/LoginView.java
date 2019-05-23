@@ -125,7 +125,8 @@ public class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTNLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTNLoginMouseClicked
-        lm.CheckUserAcces();
+        //lm.CheckUserAcces();
+        lm.CheckUserAccesSecond();
     }//GEN-LAST:event_BTNLoginMouseClicked
 
     

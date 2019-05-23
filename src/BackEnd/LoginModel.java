@@ -2,6 +2,7 @@ package BackEnd;
 
 import Frontend.LoginView;
 import Frontend.CarRegistryFrame;
+import Frontend.CRUserFrame;
 
 
 public class LoginModel {
@@ -35,11 +36,35 @@ public class LoginModel {
             LoginError();
         }
     }
+    
+    // TODO: must write in strategy or somethin more elgant
+    public void CheckUserAccesSecond(){
+        LoginAttempt();
+        if(lview.GetName().equals(this.UserName)&& numberOfTry <= maxNumberOfTry){
+            if(lview.GetPass().equals(this.UserPassword)){
+                LoadUserRentForm();
+            }
+            else{
+                LoginError();
+            }
+        }
+        else{
+            LoginError();
+        }
+    }
+    
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginModel.class.getName());
     
     private void LoadRegistryForm(){
         CarRegistryFrame crf = new CarRegistryFrame();
         crf.setVisible(true);
+        logger.info("Sikeres bejelentkezés.");
+    }
+    
+    private void LoadUserRentForm(){
+        CRUserFrame cruf = new CRUserFrame();
+        cruf.setVisible(true);
         logger.info("Sikeres bejelentkezés.");
     }
     
