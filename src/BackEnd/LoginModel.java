@@ -3,6 +3,8 @@ package BackEnd;
 import Frontend.LoginView;
 import Frontend.CarRegistryFrame;
 import Frontend.CRUserFrame;
+import BackEnd.AdminLogin;
+import BackEnd.UserLogin;
 
 
 public class LoginModel {
@@ -15,57 +17,37 @@ public class LoginModel {
     private String UserPassword = "1234";
     private int numberOfTry = 0;
     private int maxNumberOfTry = 5;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginModel.class.getName());
     
     
     public LoginModel(LoginView view){
         this.lview = view;
     }
     
-    //TODO: switch es meghivni megfelelo viselkeest v staregia
-    public void CheckUserAcces(){
-        LoginAttempt();
-        if(lview.GetName().equals(this.AdminName)&& numberOfTry <= maxNumberOfTry){
-            if(lview.GetPass().equals(this.AdminPassword)){
-                LoadRegistryForm();
+    public void CheckTypeOfLogin(){
+        numberOfTry++;
+        logger.info("Bejelentkezési kisérlet indítása.");
+        switch(lview.GetName()){
+            case "admin":
+                if(lview.GetPass().equals(this.AdminPassword)){
+                BelepesKivalaszto loginType = new BelepesKivalaszto();
+                loginType.BelepesValaszt(new AdminLogin());
+                loginType.Login();
             }
-            else{
+                break;
+            case "user":
+                if(lview.GetPass().equals(this.UserPassword)){
+                BelepesKivalaszto loginType = new BelepesKivalaszto();
+                loginType.BelepesValaszt(new UserLogin());
+                loginType.Login();
+            }
+                
+                break;
+            default:
                 LoginError();
-            }
+            
+            
         }
-        else{
-            LoginError();
-        }
-    }
-    
-    // TODO: must write in strategy or somethin more elgant
-    public void CheckUserAccesSecond(){
-        LoginAttempt();
-        if(lview.GetName().equals(this.UserName)&& numberOfTry <= maxNumberOfTry){
-            if(lview.GetPass().equals(this.UserPassword)){
-                LoadUserRentForm();
-            }
-            else{
-                LoginError();
-            }
-        }
-        else{
-            LoginError();
-        }
-    }
-    
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginModel.class.getName());
-    
-    private void LoadRegistryForm(){
-        CarRegistryFrame crf = new CarRegistryFrame();
-        crf.setVisible(true);
-        logger.info("Sikeres bejelentkezés.");
-    }
-    
-    private void LoadUserRentForm(){
-        CRUserFrame cruf = new CRUserFrame();
-        cruf.setVisible(true);
-        logger.info("Sikeres bejelentkezés.");
     }
     
     private void LoginError(){
@@ -74,9 +56,8 @@ public class LoginModel {
         lview.SetErrorLabel(StringMsg);
     }
     
-    public void LoginAttempt(){
-        numberOfTry++;
-        logger.info("Bejelentkezési kisérlet indítása.");
-    }
     
 }
+
+
+

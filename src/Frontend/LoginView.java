@@ -4,7 +4,7 @@ import BackEnd.LoginModel;
 import java.awt.Color;
 
 public class LoginView extends javax.swing.JFrame {
-    private LoginModel loginM;
+    //private LoginModel loginM;
     LoginModel lm = new LoginModel(this);
    
     public LoginView() {
@@ -125,8 +125,9 @@ public class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTNLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTNLoginMouseClicked
+        lm.CheckTypeOfLogin();
+        //lm.CheckAdminAcces();
         //lm.CheckUserAcces();
-        lm.CheckUserAccesSecond();
     }//GEN-LAST:event_BTNLoginMouseClicked
 
     

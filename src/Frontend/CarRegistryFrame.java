@@ -3,16 +3,16 @@ package Frontend;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Arrays;
+import java.util.List;
+import javax.persistence.Query;
 
 public class CarRegistryFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CarRegistryFrame
-     */
     public CarRegistryFrame() {
         initComponents();
         entityManager.getTransaction().begin();
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -228,11 +228,7 @@ public class CarRegistryFrame extends javax.swing.JFrame {
             c.setPrice(Integer.valueOf(TFPrice.getText()));           
             c.setAvailable(rootPaneCheckingEnabled);
             c.setYear(Integer.valueOf(TFYEAR.getText()));
-            
-            
-            
-            
-            
+
             entityManager.persist(c);
             carsList.add(c);
             int row = carsList.size()-1;
@@ -247,8 +243,10 @@ public class CarRegistryFrame extends javax.swing.JFrame {
         try {
                 entityManager.getTransaction().commit();
                 entityManager.getTransaction().begin();
+                //RefreshData;
                 SyncData();
         } catch (Exception e) {
+            System.out.println("Hiba:"+ e);
         }
     }//GEN-LAST:event_BTNRecordActionPerformed
 
@@ -260,12 +258,43 @@ public class CarRegistryFrame extends javax.swing.JFrame {
                 entityManager.remove(carsList.get(selectedRow));
                 entityManager.getTransaction().commit();
                 entityManager.getTransaction().begin();
+                //Operations.SyncData(carsList,carsQuery);
                 SyncData();
                 
         } catch (Exception e) {
+            System.out.println("Hiba:"+ e);
         }
     }//GEN-LAST:event_BTNDeleteActionPerformed
 
+    // USE CTRL + SHIFT + C for fast commenting- uncommenting
+//    public List<Object[]> getQueryList(){
+//        return this.carsQuery.getResultList();
+//    }
+//    public void setQuery(Query query){
+//        this.carsQuery = query;
+//    }
+//    
+//    public List<Cars> getCarList(){
+//        return this.carsList;
+//    }
+//    
+//    public void setCarList(List<Cars> cars){
+//        this.carsList = cars;
+//    }
+//    
+//    public Query getQuery(){
+//        return carsQuery;
+//    }
+    
+    private void SyncData() {
+        try {
+            
+            carsList.clear();
+            carsList.addAll(carsQuery.getResultList());
+        } catch (Exception e) {
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -322,14 +351,6 @@ public class CarRegistryFrame extends javax.swing.JFrame {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-    //TODO: move to the model reteg
-    private void SyncData() {
-        try {
-            
-            carsList.clear();
-            carsList.addAll(carsQuery.getResultList());
-        } catch (Exception e) {
-        }
-    }
+    
     
 }
