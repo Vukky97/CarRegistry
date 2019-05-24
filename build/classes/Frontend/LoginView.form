@@ -119,7 +119,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblvernum">
       <Properties>
-        <Property name="text" type="java.lang.String" value="v0.1"/>
+        <Property name="text" type="java.lang.String" value="v1.0"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="TFName">

@@ -1,7 +1,4 @@
-package BackEnd;
-
-import BackEnd.BelepesiStrategia;
-
+package BackEnd.Strategy;
 
 public class BelepesKivalaszto {
     

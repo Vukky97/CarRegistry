@@ -1,22 +1,18 @@
 package BackEnd;
 
+import BackEnd.Strategy.BelepesKivalaszto;
+import BackEnd.Strategy.AdminLogin;
+import BackEnd.Strategy.UserLogin;
 import Frontend.LoginView;
-import Frontend.CarRegistryFrame;
-import Frontend.CRUserFrame;
-import BackEnd.AdminLogin;
-import BackEnd.UserLogin;
-
 
 public class LoginModel {
     
     private LoginView lview;
     
     private String AdminName = "admin";
-    private String AdminPassword = "pass";
+    private final String AdminPassword = "pass";
     private String UserName = "user";
-    private String UserPassword = "1234";
-    private int numberOfTry = 0;
-    private int maxNumberOfTry = 5;
+    private final String UserPassword = "1234";
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginModel.class.getName());
     
     
@@ -25,7 +21,6 @@ public class LoginModel {
     }
     
     public void CheckTypeOfLogin(){
-        numberOfTry++;
         logger.info("Bejelentkezési kisérlet indítása.");
         switch(lview.GetName()){
             case "admin":
@@ -33,20 +28,24 @@ public class LoginModel {
                 BelepesKivalaszto loginType = new BelepesKivalaszto();
                 loginType.BelepesValaszt(new AdminLogin());
                 loginType.Login();
-            }
+                }
+                else{
+                    LoginError(); 
+                }
                 break;
             case "user":
                 if(lview.GetPass().equals(this.UserPassword)){
                 BelepesKivalaszto loginType = new BelepesKivalaszto();
                 loginType.BelepesValaszt(new UserLogin());
                 loginType.Login();
-            }
-                
+                }
+                else{
+                    LoginError(); 
+                }
+             
                 break;
             default:
-                LoginError();
-            
-            
+                LoginError();  
         }
     }
     

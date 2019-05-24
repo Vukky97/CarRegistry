@@ -1,5 +1,6 @@
-package BackEnd;
+package BackEnd.Strategy;
 
+import BackEnd.LoginModel;
 import BackEnd.LoginModel;
 import Frontend.CRUserFrame;
 
@@ -12,7 +13,7 @@ public class UserLogin extends BelepesiStrategia {
     public void Login() {
         CRUserFrame cruf = new CRUserFrame();
         cruf.setVisible(true);
-        logger.info("Sikeres bejelentkezés.");
+        logger.info("Sikeres bejelentkezés Felhasználóként.");
     }
     
 }

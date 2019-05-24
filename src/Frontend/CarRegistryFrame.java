@@ -10,10 +10,11 @@ public class CarRegistryFrame extends javax.swing.JFrame {
 
     public CarRegistryFrame() {
         initComponents();
-        entityManager.getTransaction().begin();
+        ReadFunction();
+        
     }
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CarRegistryFrame.class.getName());
     
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -39,6 +40,8 @@ public class CarRegistryFrame extends javax.swing.JFrame {
         BTNRecord = new javax.swing.JButton();
         BTNDelete = new javax.swing.JButton();
         CBox = new javax.swing.JCheckBox();
+        BTNBack = new javax.swing.JButton();
+        BTNClean = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,20 +106,23 @@ public class CarRegistryFrame extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblData, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.year}"), TFYEAR, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        BTNAdd.setText("ADD");
+        BTNAdd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BTNAdd.setText("CREATE");
         BTNAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNAddActionPerformed(evt);
             }
         });
 
-        BTNRecord.setText("RECORD");
+        BTNRecord.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BTNRecord.setText("UPDATE");
         BTNRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNRecordActionPerformed(evt);
             }
         });
 
+        BTNDelete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         BTNDelete.setText("DELETE");
         BTNDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,6 +133,22 @@ public class CarRegistryFrame extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblData, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.available}"), CBox, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
+        BTNBack.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BTNBack.setText("BACK");
+        BTNBack.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTNBackMouseClicked(evt);
+            }
+        });
+
+        BTNClean.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BTNClean.setText("CLEAN");
+        BTNClean.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BTNCleanMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,49 +156,59 @@ public class CarRegistryFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(TFMAKE, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TFEngine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TFMODELL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(74, 74, 74)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                                .addComponent(TFPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(97, 97, 97))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(90, 90, 90)
-                                        .addComponent(TFYEAR, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(117, 117, 117)
-                                        .addComponent(CBox)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BTNAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(BTNRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(BTNDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(108, 108, 108))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(TFMAKE, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(38, 38, 38)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(TFEngine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(TFMODELL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(74, 74, 74)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                                        .addComponent(TFPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(97, 97, 97))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(90, 90, 90)
+                                                .addComponent(TFYEAR, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(117, 117, 117)
+                                                .addComponent(CBox)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(BTNAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                                    .addComponent(BTNDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(BTNRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BTNBack)
+                                .addGap(6, 6, 6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(BTNClean)
+                                .addGap(0, 6, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,23 +219,25 @@ public class CarRegistryFrame extends javax.swing.JFrame {
                     .addComponent(TFMAKE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(TFPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTNAdd))
-                .addGap(32, 32, 32)
+                    .addComponent(BTNAdd)
+                    .addComponent(BTNBack))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(jLabel5)
                         .addComponent(TFMODELL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BTNRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
+                        .addComponent(BTNRecord)
+                        .addComponent(BTNClean, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel6)
                     .addComponent(TFEngine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TFYEAR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTNDelete))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -218,53 +252,24 @@ public class CarRegistryFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_TFEngineActionPerformed
 
     private void BTNAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAddActionPerformed
-        try{
-            // TODO: log here insertion kiserlet
-            // type of list
-            Cars c = new Cars();
-            c.setMake(TFMAKE.getText());
-            c.setModell(TFMODELL.getText());
-            c.setEngine(TFEngine.getText());
-            c.setPrice(Integer.valueOf(TFPrice.getText()));           
-            c.setAvailable(rootPaneCheckingEnabled);
-            c.setYear(Integer.valueOf(TFYEAR.getText()));
-
-            entityManager.persist(c);
-            carsList.add(c);
-            int row = carsList.size()-1;
-            tblData.setRowSelectionInterval(row, row);
-        }catch(Exception e){
-            // TODO: log: rekord letrehpozasa sikerlteen
-            System.out.println(e);
-        }
+        CreateFunction();
     }//GEN-LAST:event_BTNAddActionPerformed
 
     private void BTNRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNRecordActionPerformed
-        try {
-                entityManager.getTransaction().commit();
-                entityManager.getTransaction().begin();
-                //RefreshData;
-                SyncData();
-        } catch (Exception e) {
-            System.out.println("Hiba:"+ e);
-        }
+        UpdateFunction();
     }//GEN-LAST:event_BTNRecordActionPerformed
 
     private void BTNDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNDeleteActionPerformed
-        try {
-            // TODO : athelyezni backendbe nem a gombok on fjetjuk ki mukodesuket..
-                int selectedRow = tblData.getSelectedRow();
-                selectedRow = tblData.convertRowIndexToModel(selectedRow);
-                entityManager.remove(carsList.get(selectedRow));
-                entityManager.getTransaction().commit();
-                entityManager.getTransaction().begin();
-                //Operations.SyncData(carsList,carsQuery);
-                SyncData();
-                
-        } catch (Exception e) {
-            System.out.println("Hiba:"+ e);
-        }
+        DeleteFunction();
     }//GEN-LAST:event_BTNDeleteActionPerformed
+
+    private void BTNBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTNBackMouseClicked
+        LogOut();
+    }//GEN-LAST:event_BTNBackMouseClicked
+
+    private void BTNCleanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTNCleanMouseClicked
+        CleanTextFields();
+    }//GEN-LAST:event_BTNCleanMouseClicked
 
     // USE CTRL + SHIFT + C for fast commenting- uncommenting
 //    public List<Object[]> getQueryList(){
@@ -288,11 +293,80 @@ public class CarRegistryFrame extends javax.swing.JFrame {
     
     private void SyncData() {
         try {
-            
+             logger.info("Refreshing Data...");
             carsList.clear();
             carsList.addAll(carsQuery.getResultList());
         } catch (Exception e) {
         }
+    }
+    
+    // CRUD:
+    
+    private void CreateFunction(){
+        try{
+            Cars c = new Cars();
+            c.setMake(TFMAKE.getText());
+            c.setModell(TFMODELL.getText());
+            c.setEngine(TFEngine.getText());
+            c.setPrice(Integer.valueOf(TFPrice.getText()));           
+            c.setAvailable(rootPaneCheckingEnabled);
+            c.setYear(Integer.valueOf(TFYEAR.getText()));
+
+            entityManager.persist(c);
+            carsList.add(c);
+            int row = carsList.size()-1;
+            tblData.setRowSelectionInterval(row, row);
+            logger.info("Sikeres Hozzáadási művelet.");
+        }catch(Exception e){
+            // TODO: log: rekord letrehpozasa sikerlteen
+            System.out.println(e);
+        }
+    }
+    
+    private void ReadFunction(){
+        logger.info("Adatok beolvasása az adatbázisból..");
+        entityManager.getTransaction().begin();
+    }
+    
+    private void UpdateFunction(){
+        try {
+                logger.info("Szinkronizálás az adatbázissal..");
+                entityManager.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                //RefreshData;
+                SyncData();
+                 logger.info("Sikeres szinkronizálás!");
+        } catch (Exception e) {
+            System.out.println("Hiba:"+ e);
+        }
+    }
+    private void DeleteFunction(){
+        try {
+                logger.info("A kijelölt adatok törlésre kerültek.");
+                int selectedRow = tblData.getSelectedRow();
+                selectedRow = tblData.convertRowIndexToModel(selectedRow);
+                entityManager.remove(carsList.get(selectedRow));
+                entityManager.getTransaction().commit();
+                entityManager.getTransaction().begin();
+                //Operations.SyncData(carsList,carsQuery);
+                SyncData();
+                
+        } catch (Exception e) {
+            System.out.println("Hiba:"+ e);
+        }
+    }
+    
+    private void CleanTextFields(){
+        TFEngine.setText("");
+        TFMAKE.setText("");
+        TFMODELL.setText("");
+        TFPrice.setText("");
+        TFYEAR.setText(""); 
+    }
+    
+    private void LogOut(){
+        logger.info("Kijelentkezés...");
+        this.setVisible(false);
     }
     
     public static void main(String args[]) {
@@ -329,6 +403,8 @@ public class CarRegistryFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNAdd;
+    private javax.swing.JButton BTNBack;
+    private javax.swing.JButton BTNClean;
     private javax.swing.JButton BTNDelete;
     private javax.swing.JButton BTNRecord;
     private javax.swing.JCheckBox CBox;

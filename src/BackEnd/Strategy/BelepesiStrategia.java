@@ -1,4 +1,4 @@
-package BackEnd;
+package BackEnd.Strategy;
 
 
 public abstract class BelepesiStrategia {

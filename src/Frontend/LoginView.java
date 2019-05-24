@@ -4,7 +4,6 @@ import BackEnd.LoginModel;
 import java.awt.Color;
 
 public class LoginView extends javax.swing.JFrame {
-    //private LoginModel loginM;
     LoginModel lm = new LoginModel(this);
    
     public LoginView() {
@@ -25,9 +24,6 @@ public class LoginView extends javax.swing.JFrame {
         LBLError.setForeground(Color.red);
         LBLError.setText(ErrorMsg);
     }
-    
-    
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -57,7 +53,7 @@ public class LoginView extends javax.swing.JFrame {
 
         lblver.setText("Version:");
 
-        lblvernum.setText("v0.1");
+        lblvernum.setText("v1.0");
 
         lblName.setText("Name:");
 
@@ -126,8 +122,6 @@ public class LoginView extends javax.swing.JFrame {
 
     private void BTNLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTNLoginMouseClicked
         lm.CheckTypeOfLogin();
-        //lm.CheckAdminAcces();
-        //lm.CheckUserAcces();
     }//GEN-LAST:event_BTNLoginMouseClicked
 
     
