@@ -5,6 +5,11 @@ import BackEnd.Template.Audi;
 import BackEnd.Template.AutoVasarlas;
 import BackEnd.Template.BMW;
 import BackEnd.Template.OtherCar;
+import BackEnd.Decorator.Car;
+import BackEnd.Decorator.BasicCar;
+import BackEnd.Decorator.CarDecorator;
+import BackEnd.Decorator.Warrantee;
+import BackEnd.Decorator.Insurance;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -16,9 +21,9 @@ public class CRUserFrame extends javax.swing.JFrame {
         FillComboBox();
         entityManager.getTransaction().begin();
     }
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginModel.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CRUserFrame.class.getName());
     
-    private String[] stringExtras = new String[]{"Warrantee","Insuracne","Warrantee + Insurance"};
+    private String[] stringExtras = new String[]{"Warrantee","Insurance","Warrantee + Insurance"};
     
     private void FillComboBox(){
         for (int i = 0; i < stringExtras.length; i++) {
@@ -45,6 +50,7 @@ public class CRUserFrame extends javax.swing.JFrame {
         LBLExtras = new javax.swing.JLabel();
         lblCost = new javax.swing.JLabel();
         LBLCost = new javax.swing.JLabel();
+        LBLSelect = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,16 +68,15 @@ public class CRUserFrame extends javax.swing.JFrame {
         });
 
         tblUserRent.setAutoCreateRowSorter(true);
+        tblUserRent.setDoubleBuffered(true);
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, carsList, tblUserRent);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${make}"));
         columnBinding.setColumnName("Make");
         columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${modell}"));
         columnBinding.setColumnName("Modell");
         columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${engine}"));
         columnBinding.setColumnName("Engine");
         columnBinding.setColumnClass(String.class);
@@ -81,7 +86,6 @@ public class CRUserFrame extends javax.swing.JFrame {
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${year}"));
         columnBinding.setColumnName("Year");
         columnBinding.setColumnClass(Integer.class);
-        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane2.setViewportView(tblUserRent);
@@ -105,10 +109,12 @@ public class CRUserFrame extends javax.swing.JFrame {
         LBLExtras.setText("Select Extras:");
 
         lblCost.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblCost.setText("Actual Cost:");
+        lblCost.setText("Finall Cost:");
 
         LBLCost.setBackground(new java.awt.Color(255, 0, 0));
         LBLCost.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        LBLSelect.setText("Please select a row!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,8 +122,10 @@ public class CRUserFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(LBLWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(220, 220, 220)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LBLWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LBLSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(133, 133, 133)
                 .addComponent(LBLBuyCar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
                 .addComponent(BTNBack, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -128,18 +136,17 @@ public class CRUserFrame extends javax.swing.JFrame {
                         .addGap(279, 279, 279)
                         .addComponent(BTNBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
+                        .addGap(244, 244, 244)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(LBLExtras, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
+                                .addComponent(LBLExtras, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
                                 .addComponent(CBExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(LBLCost, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblCost, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LBLCost, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(288, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2)
@@ -150,21 +157,24 @@ public class CRUserFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LBLWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(BTNBack, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(LBLBuyCar, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
+                        .addComponent(LBLBuyCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(LBLWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LBLSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LBLExtras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CBExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCost, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LBLCost, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(CBExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LBLExtras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(37, 37, 37)
                 .addComponent(BTNBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
@@ -176,6 +186,7 @@ public class CRUserFrame extends javax.swing.JFrame {
 
     private void BTNBuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTNBuyMouseClicked
         BuySelectedCar();
+        CallDecorator();
     }//GEN-LAST:event_BTNBuyMouseClicked
 
     private void BTNBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTNBackMouseClicked
@@ -187,37 +198,10 @@ public class CRUserFrame extends javax.swing.JFrame {
             carsList.clear();
             carsList.addAll(carsQuery.getResultList());
         } catch (Exception e) {
+            System.out.println("Hiba: "+ e);
         }
     }
-    
-//    private void setData(dbList data){
-//        DefaultTableModel tm = (DefaultTableModel) table.getModel();
-//        tm.setRowCount(0);
-//        Map<String, String> d;
-//        for(int i : data.keySet()){
-//            d = data.get(i);
-//            tm.addRow(new Object[]{
-//                d.get("id"),
-//                d.get("nama"),
-//                d.get("telepon"),
-//                d.get("handphone"),
-//                d.get("email")
-//            });
-//        }
-//    }
-    
-//    public void filterSearch(String search){
-//        entityManager.getTransaction().begin();
-//        Query query = entityManager.createQuery("(\"SELECT c FROM Cars c", Cars.class);
-//        List<String> results = query.getResultList();
-//        System.out.println(results);
-        //setData(Members.searchByName(search));
-        
-//         TypedQuery<String> query = em.createQuery(
-//         "SELECT c.name FROM Country AS c", String.class);
-//        List<String> results = query.getResultList();
-
-    //}
+   
     public void LogOut(){
         logger.info("Kijelentkezés...");
         this.setVisible(false);
@@ -227,18 +211,51 @@ public class CRUserFrame extends javax.swing.JFrame {
         logger.info("Autó megvásárlása folyamatban..");
         int selectedRow = tblUserRent.getSelectedRow();
                 selectedRow = tblUserRent.convertRowIndexToModel(selectedRow);
-                entityManager.remove(carsList.get(selectedRow));
-                entityManager.getTransaction().commit();
-                entityManager.getTransaction().begin();
-                Refresh();
                 
                 int MadeColumnID = 0;
                 int CostColumnID = 3;
+                
                 String selectedMake = String.valueOf(tblUserRent.getModel().getValueAt(tblUserRent.getSelectedRow(), MadeColumnID));
                 int Price = Integer.valueOf(String.valueOf(tblUserRent.getModel().getValueAt(tblUserRent.getSelectedRow(), CostColumnID)));
                 LBLCost.setText(String.valueOf(tblUserRent.getModel().getValueAt(tblUserRent.getSelectedRow(), CostColumnID)));
                 System.out.println(selectedMake);
                 CallTemplateMethod(selectedMake);
+                
+                entityManager.remove(carsList.get(selectedRow));
+                entityManager.getTransaction().commit();
+                entityManager.getTransaction().begin();
+
+                Refresh();  
+                logger.info("Sikeres vétel.");
+    }
+    
+    public void CallDecorator(){
+         String selectedExtra = GetSelectedExtraValue();
+         switch(selectedExtra){
+             
+             case("Warrantee"):
+                 Car carWithWarrantee = new Warrantee(new BasicCar(this));
+                 // Not so Elegant:
+                 // carWithWarrantee.GetPrice();
+                 // carWithWarrantee.GetExtras();
+                 ShowCarExtras(carWithWarrantee);
+                 break;
+             case("Insurance"):
+                 Car carWithInsurance = new Insurance(new BasicCar(this));
+                 ShowCarExtras(carWithInsurance);
+                 break;
+             case("Warrantee + Insurance"):
+                 Car carWithAllExtras = new Insurance(new Warrantee(new BasicCar(this)));
+                 ShowCarExtras(carWithAllExtras);
+                 break;
+             default:
+                 System.out.println("Invalid Extra Selected!");
+         }
+    }
+    
+    
+    public String GetSelectedExtraValue(){
+        return String.valueOf(CBExtra.getSelectedItem());
     }
     
     private void CallTemplateMethod(String selectedMake){
@@ -250,11 +267,34 @@ public class CRUserFrame extends javax.swing.JFrame {
             case "Audi":
                 AutoVasarlas audi = new Audi();
                 audi.VasarlasMenete();
+                break;
             default:
                 AutoVasarlas anothercar = new OtherCar();
                 anothercar.VasarlasMenete();
+                break;
         }
     }
+    
+    public String GetSelectedCarValue(){
+        return this.LBLCost.getText();
+    }
+    
+    public void ShowCarExtras(Car selectedCarExtras){
+        System.out.println("----------------------");
+        System.out.println("Az autó ára az extrá(k)-al együtt: "+ selectedCarExtras.GetPrice());
+        System.out.println("Extrák: " +selectedCarExtras.GetExtras());
+        LBLCost.setText(String.valueOf(selectedCarExtras.GetPrice()));
+    }
+    
+    
+//    public void SetPriceLabel(){
+//            int MadeColumnID = 0;
+//            int CostColumnID = 3;
+//            int Price = Integer.valueOf(String.valueOf(tblUserRent.getModel().getValueAt(tblUserRent.getSelectedRow(), CostColumnID)));
+//            LBLCost.setText(String.valueOf(tblUserRent.getModel().getValueAt(tblUserRent.getSelectedRow(), CostColumnID)));
+//            tblUserRent.repaint();
+//    }
+    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -295,6 +335,7 @@ public class CRUserFrame extends javax.swing.JFrame {
     private javax.swing.JLabel LBLBuyCar;
     private javax.swing.JLabel LBLCost;
     private javax.swing.JLabel LBLExtras;
+    private javax.swing.JLabel LBLSelect;
     private javax.swing.JLabel LBLWelcome;
     private java.util.List<Frontend.Cars> carsList;
     private javax.persistence.Query carsQuery;

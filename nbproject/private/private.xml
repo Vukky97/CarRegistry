@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/PROJECTS/GitHub/CarRegistry/src/BackEnd/LoginModel.java</file>
-            <file>file:/D:/PROJECTS/GitHub/CarRegistry/src/Frontend/Cars.java</file>
-            <file>file:/D:/PROJECTS/GitHub/CarRegistry/src/BackEnd/BelepesKivalaszto.java</file>
-            <file>file:/D:/PROJECTS/GitHub/CarRegistry/src/Frontend/CarRegistryFrame.java</file>
-            <file>file:/D:/PROJECTS/GitHub/CarRegistry/src/BackEnd/BelepesiStrategia.java</file>
-            <file>file:/D:/PROJECTS/GitHub/CarRegistry/src/Frontend/CRUserFrame.java</file>
-            <file>file:/D:/PROJECTS/GitHub/CarRegistry/src/BackEnd/AdminLogin.java</file>
-            <file>file:/D:/PROJECTS/GitHub/CarRegistry/src/BackEnd/UserLogin.java</file>
-            <file>file:/D:/PROJECTS/GitHub/CarRegistry/src/Frontend/LoginView.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

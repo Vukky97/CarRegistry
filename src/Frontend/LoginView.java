@@ -8,6 +8,7 @@ public class LoginView extends javax.swing.JFrame {
    
     public LoginView() {
         initComponents();
+        CleanInputFields();
     }
     
     public String GetName(){
@@ -23,6 +24,11 @@ public class LoginView extends javax.swing.JFrame {
     public void SetErrorLabel(String ErrorMsg){
         LBLError.setForeground(Color.red);
         LBLError.setText(ErrorMsg);
+    }
+    
+    public void CleanInputFields(){
+        TFName.setText("");
+        TFPassword.setText("");
     }
     
     @SuppressWarnings("unchecked")

@@ -5,6 +5,8 @@ import java.util.Set;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Query;
+import Frontend.LoginView;
+import javax.swing.JOptionPane;
 
 public class CarRegistryFrame extends javax.swing.JFrame {
 
@@ -265,6 +267,7 @@ public class CarRegistryFrame extends javax.swing.JFrame {
 
     private void BTNBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTNBackMouseClicked
         LogOut();
+        
     }//GEN-LAST:event_BTNBackMouseClicked
 
     private void BTNCleanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BTNCleanMouseClicked
@@ -297,6 +300,7 @@ public class CarRegistryFrame extends javax.swing.JFrame {
             carsList.clear();
             carsList.addAll(carsQuery.getResultList());
         } catch (Exception e) {
+            System.out.println("Hiba: "+ e);
         }
     }
     
@@ -317,6 +321,7 @@ public class CarRegistryFrame extends javax.swing.JFrame {
             int row = carsList.size()-1;
             tblData.setRowSelectionInterval(row, row);
             logger.info("Sikeres Hozzáadási művelet.");
+            
         }catch(Exception e){
             // TODO: log: rekord letrehpozasa sikerlteen
             System.out.println(e);
@@ -355,6 +360,20 @@ public class CarRegistryFrame extends javax.swing.JFrame {
             System.out.println("Hiba:"+ e);
         }
     }
+    
+//    public void TheresEmptyLabels(Cars c){
+//        if(TFEngine.getText().isEmpty()||
+//        TFMAKE.getText().isEmpty() || 
+//        TFMODELL.getText().isEmpty() ||
+//        TFPrice.getText().isEmpty() ||
+//        TFYEAR.getText().isEmpty()){
+//        JOptionPane.showMessageDialog(null, "You need to fill all the input labels!");
+//        //return true;
+//        }
+//        else{
+//             //return false;
+//        }
+//        }
     
     private void CleanTextFields(){
         TFEngine.setText("");

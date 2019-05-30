@@ -22,30 +22,38 @@ public class LoginModel {
     
     public void CheckTypeOfLogin(){
         logger.info("Bejelentkezési kisérlet indítása.");
+        BelepesKivalaszto loginType = new BelepesKivalaszto();
         switch(lview.GetName()){
             case "admin":
-                if(lview.GetPass().equals(this.AdminPassword)){
-                BelepesKivalaszto loginType = new BelepesKivalaszto();
-                loginType.BelepesValaszt(new AdminLogin());
-                loginType.Login();
-                }
-                else{
-                    LoginError(); 
-                }
+                CheckAdminAcces(loginType);
                 break;
             case "user":
-                if(lview.GetPass().equals(this.UserPassword)){
-                BelepesKivalaszto loginType = new BelepesKivalaszto();
-                loginType.BelepesValaszt(new UserLogin());
-                loginType.Login();
-                }
-                else{
-                    LoginError(); 
-                }
-             
+                CheckUserAcces(loginType);
                 break;
             default:
                 LoginError();  
+        }
+    }
+    
+    public void CheckAdminAcces(BelepesKivalaszto loginType){
+        if(lview.GetPass().equals(this.AdminPassword)){
+            loginType.BelepesValaszt(new AdminLogin());
+            loginType.Login();
+            lview.CleanInputFields();
+        }
+        else{
+            LoginError(); 
+        }
+    }
+    
+    public void CheckUserAcces(BelepesKivalaszto loginType){
+        if(lview.GetPass().equals(this.UserPassword)){
+            loginType.BelepesValaszt(new UserLogin());
+            loginType.Login();
+            lview.CleanInputFields();
+        }
+        else{
+            LoginError(); 
         }
     }
     
