@@ -294,6 +294,9 @@ public class CarRegistryFrame extends javax.swing.JFrame {
 //        return carsQuery;
 //    }
     
+    /**
+     * Refreshing the shown data (in the JTable) from the mysql database.
+     */
     private void SyncData() {
         try {
              logger.info("Refreshing Data...");
@@ -306,6 +309,9 @@ public class CarRegistryFrame extends javax.swing.JFrame {
     
     // CRUD:
     
+    /**
+     * Megvalositja a hozzaadas muveletet.
+     */
     private void CreateFunction(){
         try{
             Cars c = new Cars();

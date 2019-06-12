@@ -2,6 +2,10 @@ package BackEnd.Template;
 
 public abstract class AutoVasarlas {
     
+    /**
+     * Template Method, Simple OrderList:
+     * Check and Clean Methods are common, others are different.
+     */
     public void VasarlasMenete(){
         // végrehajtási lista
         Check();

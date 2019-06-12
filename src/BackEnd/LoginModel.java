@@ -63,6 +63,22 @@ public class LoginModel {
         lview.SetErrorLabel(StringMsg);
     }
     
+    public String GetUserName(){
+        return UserName;
+    }
+    
+    public String GetUserPass(){
+        return UserPassword;
+    }
+    
+    public String GetAdminName(){
+        return AdminName;
+    }
+    
+    public String GetAdminPass(){
+        return AdminPassword;
+    }
+    
     
 }
 
