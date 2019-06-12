@@ -1,5 +1,6 @@
 package TestGUI;
 
+import Automatize.Bot;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
@@ -8,8 +9,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import BackEnd.LoginModel;
 import Frontend.LoginView;
-import org.junit.After;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 
+@FixMethodOrder(MethodSorters.DEFAULT)
 public class LoginTestUser {
     public LoginTestUser(){
         
@@ -20,11 +23,7 @@ public class LoginTestUser {
     Returns a robot to the caller (each test method),
     its elgant, prevent code duplication.
     */
-    private Robot GetRobot() throws AWTException{
-        Robot robi = new Robot();
-        return robi;
-        
-    }
+    Bot bot = new Bot();
     
      /**
      * Test of GetName method, of class LoginView.
@@ -39,7 +38,7 @@ public class LoginTestUser {
         assertNotNull(instance);
         // Name Label position approx: at 125 80 px
         instance.setVisible(true);
-        Robot robi = GetRobot();
+        Robot robi = bot.GetRobot();
         robi.mouseMove(265, 135);
         robi.mousePress(InputEvent.BUTTON1_MASK);
         try{Thread.sleep(100);}catch(InterruptedException e){}
@@ -68,7 +67,7 @@ public class LoginTestUser {
      * @throws AWTException 
      */
     @Test
-    public void testGetPassword() throws AWTException {
+    public void testsGetPassword() throws AWTException {
         try{Thread.sleep(500);}catch(InterruptedException e){}
         System.out.println("Testing User GetPassword with Robot");
         LoginView loginView = new LoginView();
@@ -76,7 +75,7 @@ public class LoginTestUser {
         
         assertNotNull(loginView);
         loginView.setVisible(true);
-        Robot robi = GetRobot();
+        Robot robi = bot.GetRobot();
         robi.mouseMove(265, 175);
         robi.mousePress(InputEvent.BUTTON1_MASK);
         try{Thread.sleep(100);}catch(InterruptedException e){}
